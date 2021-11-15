@@ -22,9 +22,9 @@ const ap = new APlayer({
         cover: 'http://oeff2vktt.bkt.clouddn.com/image/96.jpg',
       },
 	  {
-		  name: 'imagine'
-		  artist: 'John Lennon'
-		  url: 'http://music.163.com/song/media/outer/url?id=1476431.mp3'
+		name: 'imagine'
+		artist: 'John Lennon'
+		url: 'http://music.163.com/song/media/outer/url?id=1476431.mp3'
 	  }
     ]
 });
