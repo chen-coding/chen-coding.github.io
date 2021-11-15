@@ -20,6 +20,11 @@ const ap = new APlayer({
         artist: '刘珂矣',
         url: 'http://up.mcyt.net/?down/46644.mp3',
         cover: 'http://oeff2vktt.bkt.clouddn.com/image/96.jpg',
-      }
+      },
+	  {
+		  name: 'imagine'
+		  artist: 'John Lennon'
+		  url: 'http://music.163.com/song/media/outer/url?id=1476431.mp3'
+	  }
     ]
 });
