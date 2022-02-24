@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/js/src/photoswipe.min.js?v="></script>
+  <script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="安装过程 系统版本：Unbantu18.04 Python: 3.6 tensorflow: 1.13  安装步骤参照Tensorflow官网安装文档使用 pip 安装 TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用阿里云服务器安装Tensorflow">
+<meta property="og:url" content="http://example.com/2021/11/17/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E8%A3%85Tensorflow/index.html">
+<meta property="og:site_name" content="TFChen">
+<meta property="og:description" content="安装过程 系统版本：Unbantu18.04 Python: 3.6 tensorflow: 1.13  安装步骤参照Tensorflow官网安装文档使用 pip 安装 TensorFlow">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20220224162243070.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20220224162705561.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234137322.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234525834.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234928949.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103235100568.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193146896.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193251398.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193335946.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193438318.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193656688.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193758888.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193335946.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103102635023.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103103954573.png">
+<meta property="og:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103111525702.png">
+<meta property="article:published_time" content="2021-11-17T06:40:44.000Z">
+<meta property="article:modified_time" content="2022-02-24T09:57:43.718Z">
+<meta property="article:author" content="二胖">
+<meta property="article:tag" content="tensorflow">
+<meta property="article:tag" content="阿里云">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20220224162243070.png">
+
+
+<link rel="canonical" href="http://example.com/2021/11/17/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E8%A3%85Tensorflow/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/11/17/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E8%A3%85Tensorflow/","path":"2021/11/17/使用阿里云安装Tensorflow/","title":"使用阿里云服务器安装Tensorflow"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用阿里云服务器安装Tensorflow | TFChen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+
+
+
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">TFChen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影片</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85Python%E5%92%8Cpip"><span class="nav-number">1.1.</span> <span class="nav-text">第一步：检查是否安装Python和pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">第二步：创建虚拟环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">安装完成后进行测试出现的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A-home-image-conda-envs-tensorflow-lib-python3-6-site-packages-tensorflow-python-framework-dtypes-py"><span class="nav-number">1.3.1.</span> <span class="nav-text">问题一：&#x2F;home&#x2F;image&#x2F;.conda&#x2F;envs&#x2F;tensorflow&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;tensorflow&#x2F;python&#x2F;framework&#x2F;dtypes.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9Anumpy%E7%89%88%E6%9C%AC%E8%BF%87%E9%AB%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">问题二：numpy版本过高</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BC%AF%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">一些弯路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text">问题一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">问题二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="二胖"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">二胖</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="/tfchen_ep@163.com" title="E-Mail → tfchen_ep@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/17/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E8%A3%85Tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="二胖">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TFChen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用阿里云服务器安装Tensorflow
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-17 14:40:44" itemprop="dateCreated datePublished" datetime="2021-11-17T14:40:44+08:00">2021-11-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-02-24 17:57:43" itemprop="dateModified" datetime="2022-02-24T17:57:43+08:00">2022-02-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ul>
+<li>系统版本：Unbantu18.04</li>
+<li>Python: 3.6</li>
+<li>tensorflow: 1.13</li>
+</ul>
+<p>安装步骤参照Tensorflow官网安装文档<a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/pip#ubuntu">使用 pip 安装 TensorFlow</a></p>
+<span id="more"></span>
+
+<h3 id="第一步：检查是否安装Python和pip"><a href="#第一步：检查是否安装Python和pip" class="headerlink" title="第一步：检查是否安装Python和pip"></a>第一步：检查是否安装Python和pip</h3><p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20220224162243070.png" alt="image-20220224162243070"></p>
+<p>如已安装则跳过此步骤，否则安装python和pip（注意版本）</p>
+<h3 id="第二步：创建虚拟环境"><a href="#第二步：创建虚拟环境" class="headerlink" title="第二步：创建虚拟环境"></a>第二步：创建虚拟环境</h3><p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20220224162705561.png" alt="image-20220224162705561"></p>
+<h3 id="安装完成后进行测试出现的问题"><a href="#安装完成后进行测试出现的问题" class="headerlink" title="安装完成后进行测试出现的问题"></a>安装完成后进行测试出现的问题</h3><h4 id="问题一：-home-image-conda-envs-tensorflow-lib-python3-6-site-packages-tensorflow-python-framework-dtypes-py"><a href="#问题一：-home-image-conda-envs-tensorflow-lib-python3-6-site-packages-tensorflow-python-framework-dtypes-py" class="headerlink" title="问题一：/home/image/.conda/envs/tensorflow/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py"></a>问题一：/home/image/.conda/envs/tensorflow/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py</h4><p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234137322.png" alt="image-20211103234137322"></p>
+<p>参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/Vertira/article/details/106287849">(14条消息) /home/image/.conda/envs/tensorflow/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py_Vertira的博客-CSDN博客</a></p>
+<p>注意使用英文符号</p>
+<p>修改后仍报错</p>
+<h4 id="问题二：numpy版本过高"><a href="#问题二：numpy版本过高" class="headerlink" title="问题二：numpy版本过高"></a>问题二：numpy版本过高</h4><p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234525834.png" alt="image-20211103234525834"></p>
+<p>参考博客<a target="_blank" rel="noopener" href="https://www.cnblogs.com/youpeng/p/11732790.html">tensorflow与numpy的版本兼容性问题 - Youpeng - 博客园 (cnblogs.com)</a></p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103234928949.png" alt="image-20211103234928949"></p>
+<p>看到numpy原版本是1.19.5 安装版本1.14.0</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103235100568.png" alt="image-20211103235100568"></p>
+<p>测试成功</p>
+<h2 id="一些弯路"><a href="#一些弯路" class="headerlink" title="一些弯路"></a>一些弯路</h2><p>系统以及Python版本的错误选择导致一开始安装的一系列错误，所以一定要选择好版本！！</p>
+<ul>
+<li>系统版本 Ubuntu20.04 64位</li>
+</ul>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>使用Tensorflow官网安装文档<a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/pip#ubuntu">使用 pip 安装 TensorFlow</a></p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193146896.png" alt="image-20211102193146896"></p>
+<p>第一步检查是否安装Python和pip</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193251398.png" alt="image-20211102193251398"></p>
+<p>系统显示都已安装</p>
+<p>按照文档提示</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193335946.png" alt="image-20211102193335946"></p>
+<p>跳过这里安装python和pip等</p>
+<p>第二步创建虚拟环境</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193438318.png" alt="image-20211102193438318"></p>
+<p>这里开始出错</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193656688.png" alt="image-20211102193656688"></p>
+<p>这里提示要安装python3.8-venv</p>
+<p>然而又出错了</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193758888.png" alt="image-20211102193758888"></p>
+<p>百度各种解决办法，都无法解决</p>
+<p>然后执行官方文档提示跳过的步骤后问题解决了</p>
+<p>成功创建虚拟环境</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211102193335946.png" alt="image-20211102193335946"></p>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>由于课程需要安装tensorflow1.13版本，按照tensorflow官方文档操作只能安装2.x的新版本，不支持旧版本的安装</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103102635023.png" alt="image-20211103102635023"></p>
+<p>尝试使用命令’’’pip install –upgrade tensorflow==1.13’’’指定安装版本</p>
+<p>提示错误找不到1.13版本（提示可用的版本只有2.x）</p>
+<p>解决办法：离线安装tensorflow</p>
+<p>参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/joey_ro/article/details/116656597">(14条消息) 使用 pip 在macos上安装 TensorFlow1.x_joey_ro的博客-CSDN博客</a></p>
+<p>注意这里离线tensorflow文件下载地址要改成对应版本<a target="_blank" rel="noopener" href="https://pypi.org/project/tensorflow/1.13.1/#files">tensorflow · PyPI</a>（这里找1.13版本下载地址，原以为将网址中的1.15.0改成1.13.0就可以了，结果不行，折腾半天发现是1.13.1；另pypi的搜索实在难用，搜索pip install tensorflow==1.13.0[错误]竟然找不到pip install tensorflow==1.13.1[正确]）</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103103954573.png" alt="image-20211103103954573"></p>
+<p>下载好上面的文件后准备离线安装，又出错</p>
+<p>错误是版本不匹配</p>
+<p>原来本机环境是python3.8 这里tensorflow匹配的是python3.7</p>
+<p>安装yum</p>
+<p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/image-20211103111525702.png" alt="image-20211103111525702"></p>
+<p>卡在安装yum</p>
+<p>ubuntu上装软件还是用apt，yum是别的发行版上的工具</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装jupyter notebook</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/icehui2012/article/details/64125570">(14条消息) 适用小白：为什么要用Jupyter？以及，如何在Linux的Ubuntu 14.04LTS上安装和启动Jupyter Notebook_icehui2012的博客-CSDN博客_linux安装jupyter notebook</a></p>
+<p>问题：不允许root用户启动</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39777626/article/details/80371659">(14条消息) Running as root is not recommended. Use –allow-root to bypass_As的博客-CSDN博客</a></p>
+<p>远程访问jupyter notebook</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63497709">【干货！哪里都能写Python】以阿里云ECS为例，搭建Jupyter notebook服务 - 知乎 (zhihu.com)</a></p>
+<p>xftp不显示/root文件夹下内容</p>
+<p>工具》选项》常规》勾选显示隐藏的文件</p>
+<p>启动和退出虚拟环境</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yiduobaozhiblog1/p/12448944.html">python进入和退出虚拟环境 - 一朵包纸 - 博客园 (cnblogs.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"># 阿里云</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+          </div>
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-at"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">二胖</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2021,12,06,00,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="本站已稳定运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+    </div>
+  </footer>
+  
+  <!--Aplayer播放器-->
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
