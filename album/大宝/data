@@ -1,0 +1,27 @@
+{
+    "meta": {
+        "name": "Period",
+        "cover": "2022-03-20_cute.jpg",
+        "description": "",
+        "created": "2019-12-10 19:11:56",
+        "updated": "2019-12-31 22:54:32",
+        "imageBed": "https://photos.tfchen.cn/album",
+        "number": 8
+    },
+    "data": [
+        {
+            "date": "2022-03",
+            "images": [
+                {
+                    "name": "2022-03-20_cute.jpg",
+                    "caption": "cute",
+                    "type": "image",
+                    "date": "2022-03-20",
+                    "width": 941,
+                    "height": 1278
+                }
+            ]
+        }
+    ],
+    "updated": "2022-03-20 17:39-23"
+}

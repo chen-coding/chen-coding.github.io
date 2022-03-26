@@ -21,9 +21,8 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-  background: center center no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
+  background-position: top center;
+  object-fit: cover;
 }
 .gallery-cover-box .gallery-cover-img {
   display: inline-block;
