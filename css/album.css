@@ -33,9 +33,9 @@
   transform: translate(-50%, -50%);
 }
 .gallery-item .gallery-name {
-  font-size: 14px;
+  padding-top: 1%;
+  font-size: 20px;
   line-height: 24px;
   text-align: center;
   color: #666;
-  margin: 0;
 }

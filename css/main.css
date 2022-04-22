@@ -1633,6 +1633,11 @@ pre code {
   display: inline-block;
   margin: 0 5px;
 }
+.beian img {
+  display: inline-block;
+  margin: 0 3px;
+  vertical-align: middle;
+}
 @-moz-keyframes icon-animate {
   0%, 100% {
     transform: scale(1);
@@ -2804,9 +2809,9 @@ ul.breadcrumb li:last-child {
   transform: translate(-50%, -50%);
 }
 .gallery-item .gallery-name {
-  font-size: 14px;
+  padding-top: 1%;
+  font-size: 20px;
   line-height: 24px;
   text-align: center;
   color: #666;
-  margin: 0;
 }
