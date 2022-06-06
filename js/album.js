@@ -4,7 +4,7 @@ $(document).ready(() {
     var link = doc.createElement("link");   
     link.setAttribute("rel","stylesheet");  
     link.setAttribute("type","text/css");   
-    link.setAttribute("href",url);  
+    link.setAttribute("href",url); 
     var heads = doc.getElementsByTagName("head");   
     if (heads.length) {        
         heads[0].appendChild(link); 
