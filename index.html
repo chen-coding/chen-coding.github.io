@@ -223,7 +223,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-09-20 10:25:44" itemprop="dateModified" datetime="2022-09-20T10:25:44+08:00">2022-09-20</time>
+        <time title="修改时间：2022-09-20 10:30:45" itemprop="dateModified" datetime="2022-09-20T10:30:45+08:00">2022-09-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,161 +245,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="HuggingFace-Transformers-学习笔记（一）"><a href="#HuggingFace-Transformers-学习笔记（一）" class="headerlink" title="HuggingFace Transformers 学习笔记（一）"></a>HuggingFace Transformers 学习笔记（一）</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers">官方文档</a></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">generator = pipeline(task=<span class="string">&quot;text-generation&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>No model was supplied, defaulted to gpt2 and revision 6c0e608 (https://huggingface.co/gpt2).
-Using a pipeline without specifying a model name and revision in production is not recommended.
-
-
-
-HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=548118077.0, style=ProgressStyle(descri…
-</code></pre>
-<p>​<br>​    </p>
-<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1042301.0, style=ProgressStyle(descript…
-</code></pre>
-<p>​<br>​    </p>
-<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=456318.0, style=ProgressStyle(descripti…
-</code></pre>
-<p>​<br>​    </p>
-<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1355256.0, style=ProgressStyle(descript…
-</code></pre>
-<p>​<br>​    </p>
-<p>不指定模型，这里默认加载gpt2，这种这做法是不推荐的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    <span class="string">&quot;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-D:\Environment\anaconda3\envs\test\lib\site-packages\transformers\generation_utils.py:1227: UserWarning: Neither `max_length` nor `max_new_tokens` has been set, `max_length` will default to 50 (`self.config.max_length`). Controlling `max_length` via the config is deprecated and `max_length` will be removed from the config in v5 of Transformers -- we recommend using `max_new_tokens` to control the maximum length of the generation.
-  warnings.warn(
-
-
-
-
-
-[&#123;&#39;generated_text&#39;: &#39;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, Seven for all the Elves.\n\nThe Five Rings of Power and Influence: The Five Rings are powerful rings dedicated to the alignment&#39;&#125;]
-</code></pre>
-<p>给定一句话，让模型生成。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    [</span><br><span class="line">        <span class="string">&quot;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Nine for Mortal Men, doomed to die, One for the Dark Lord on his dark throne&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">)  <span class="comment"># doctest: +SKIP</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-
-
-
-
-
-[[&#123;&#39;generated_text&#39;: &#39;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, and so on…you get the idea.\n\nAha, my little friend…we finally have a little story in the&#39;&#125;],
- [&#123;&#39;generated_text&#39;: &#39;Nine for Mortal Men, doomed to die, One for the Dark Lord on his dark throne before the Death Prophet, One for the Eternal Dark One, and One for the One with the Eyes of Truth, in order to have the ability to take upon&#39;&#125;]]
-</code></pre>
-<p>多句话用列表形式输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    <span class="string">&quot;举头望明月，低头思故乡&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-
-
-
-
-
-[&#123;&#39;generated_text&#39;: &#39;举头望明月，低头思故乡的効重,冢也是一战油了,伙只是在&#39;&#125;]
-</code></pre>
-<p>显然模型并没有在中文上训练</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    <span class="string">&quot;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone&quot;</span>,</span><br><span class="line">    num_return_sequences=<span class="number">2</span>,</span><br><span class="line">)  <span class="comment"># doctest: +SKIP</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-
-
-
-
-
-[&#123;&#39;generated_text&#39;: &#39;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, seven for the Lord of the Sea, seven for the Emperor of the Dwarves. The Elves had their own set of seven.&#39;&#125;,
- &#123;&#39;generated_text&#39;: &#39;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone. 8,000 silver coins are scattered on the ground, and they are distributed among the Dwarves. The Dwarves are said to&#39;&#125;]
-</code></pre>
-<p>指定生成数量</p>
-<h2 id="选择模型和tokenizer"><a href="#选择模型和tokenizer" class="headerlink" title="选择模型和tokenizer"></a>选择模型和tokenizer</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModelForCausalLM</span><br><span class="line"></span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;distilgpt2&quot;</span>)</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;distilgpt2&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModelForCausalLM</span><br><span class="line"></span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;distilgpt2&quot;</span>)</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;distilgpt2&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=352833716.0, style=ProgressStyle(descri…
-</code></pre>
-<p>​<br>​    </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">generator = pipeline(task=<span class="string">&quot;text-generation&quot;</span>, model=model, tokenizer=tokenizer)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    <span class="string">&quot;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone&quot;</span></span><br><span class="line">)  <span class="comment"># doctest: +SKIP</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-D:\Environment\anaconda3\envs\test\lib\site-packages\transformers\generation_utils.py:1227: UserWarning: Neither `max_length` nor `max_new_tokens` has been set, `max_length` will default to 50 (`self.config.max_length`). Controlling `max_length` via the config is deprecated and `max_length` will be removed from the config in v5 of Transformers -- we recommend using `max_new_tokens` to control the maximum length of the generation.
-  warnings.warn(
-
-
-
-
-
-[&#123;&#39;generated_text&#39;: &#39;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, and Seven for the Dwarf-lords in their halls of stone. It is a game of choice for any dwarf elf, whether it&#39;&#125;]
-</code></pre>
-<h2 id="预处理Preprocess"><a href="#预处理Preprocess" class="headerlink" title="预处理Preprocess"></a>预处理Preprocess</h2><p>将数据传入模型前需要将数据处理成为模型可接受的格式</p>
-<h3 id="AutoTokenizer"><a href="#AutoTokenizer" class="headerlink" title="AutoTokenizer"></a>AutoTokenizer</h3><p>通过使用AutoTokenizer类加载一个预先训练的分词器，可以快速开始。这将下载预训练模型时使用的词汇表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sequence = <span class="string">&quot;In a hole in the ground there lived a hobbit.&quot;</span></span><br><span class="line"><span class="built_in">print</span>(tokenizer(sequence))</span><br></pre></td></tr></table></figure>
-
-<pre><code>&#123;&#39;input_ids&#39;: [101, 1999, 1037, 4920, 1999, 1996, 2598, 2045, 2973, 1037, 7570, 10322, 4183, 1012, 102], &#39;token_type_ids&#39;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], &#39;attention_mask&#39;: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]&#125;
-</code></pre>
-<ul>
-<li>input_ids token的索引</li>
-<li>attention_mask token是否需要被注意</li>
-<li>token_type_ids token属于哪个句子</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode(tokenizer(sequence)[<span class="string">&quot;input_ids&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&#39;[CLS] in a hole in the ground there lived a hobbit. [SEP]&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode([<span class="number">101</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&#39;##bb&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode([<span class="number">1999</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&#39;in&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode([<span class="number">10322</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&#39;##bb&#39;
-</code></pre>
-<p>输入：10个词<br>输出：15<br>分词规则？</p>
-<p>按照空格分词是最常想到的，但这里显然不是。<br>详见</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/SunJW_2017/article/details/121783956">https://blog.csdn.net/SunJW_2017/article/details/121783956</a></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoded_input = tokenizer(<span class="string">&quot;Do not meddle in the affairs of wizards, for they are subtle and quick to anger.&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(encoded_input)</span><br></pre></td></tr></table></figure>
-
-<pre><code>&#123;&#39;input_ids&#39;: [101, 2079, 2025, 19960, 10362, 1999, 1996, 3821, 1997, 16657, 1010, 2005, 2027, 2024, 11259, 1998, 4248, 2000, 4963, 1012, 102], &#39;token_type_ids&#39;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], &#39;attention_mask&#39;: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]&#125;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode(encoded_input[<span class="string">&quot;input_ids&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&quot;[CLS] don&#39;t meddle in the affairs of wizards, for they are subtle and quick to anger. [SEP]&quot;
-</code></pre>
-<p>tokenizer会在输入前加入CLS标记，末尾加入SEP分隔标记</p>
-<h2 id="AutoFeatureExtractor"><a href="#AutoFeatureExtractor" class="headerlink" title="AutoFeatureExtractor"></a>AutoFeatureExtractor</h2><p>音频和视觉任务</p>
-<h2 id="AutoProcessor"><a href="#AutoProcessor" class="headerlink" title="AutoProcessor"></a>AutoProcessor</h2><p>多模态任务 结合AutoTokenizer AutoFeatureExtractor</p>
-
+          <h1 id="HuggingFace-Transformers-学习笔记（一）"><a href="#HuggingFace-Transformers-学习笔记（一）" class="headerlink" title="HuggingFace Transformers 学习笔记（一）"></a>HuggingFace Transformers 学习笔记（一）</h1><p><img src="https://tfchen.oss-cn-beijing.aliyuncs.com/image/b6ed514916342fbc38902289d5be1983.jpeg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/e4103a6f/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
