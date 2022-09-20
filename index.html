@@ -87,7 +87,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a></li>
         <li class="menu-item menu-item-album"><a href="/album/" rel="section"><i class="fa fa-image fa-fw"></i>相册</a></li>
@@ -149,7 +149,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -192,7 +192,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.tfchen.cn/posts/0/">
+    <link itemprop="mainEntityOfPage" href="https://www.tfchen.cn/posts/e4103a6f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/0/" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/posts/e4103a6f/" class="post-title-link" itemprop="url">HuggingFace Transformers 学习笔记（一）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -215,9 +215,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-09-18 21:38:25 / 修改时间：21:36:54" itemprop="dateCreated datePublished" datetime="2022-09-18T21:38:25+08:00">2022-09-18</time>
+      <time title="创建时间：2022-09-18 21:38:25" itemprop="dateCreated datePublished" datetime="2022-09-18T21:38:25+08:00">2022-09-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-09-20 10:23:30" itemprop="dateModified" datetime="2022-09-20T10:23:30+08:00">2022-09-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+        </span>
     </span>
 
   
@@ -241,28 +256,17 @@ Using a pipeline without specifying a model name and revision in production is n
 
 
 HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=548118077.0, style=ProgressStyle(descri…
-
-
-
-
-
-
-HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1042301.0, style=ProgressStyle(descript…
-
-
-
-
-
-
-HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=456318.0, style=ProgressStyle(descripti…
-
-
-
-
-
-
-HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1355256.0, style=ProgressStyle(descript…
 </code></pre>
+<p>​<br>​    </p>
+<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1042301.0, style=ProgressStyle(descript…
+</code></pre>
+<p>​<br>​    </p>
+<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=456318.0, style=ProgressStyle(descripti…
+</code></pre>
+<p>​<br>​    </p>
+<pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=1355256.0, style=ProgressStyle(descript…
+</code></pre>
+<p>​<br>​    </p>
 <p>不指定模型，这里默认加载gpt2，这种这做法是不推荐的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generator(</span><br><span class="line">    <span class="string">&quot;Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
@@ -321,6 +325,7 @@ Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 
 <pre><code>HBox(children=(FloatProgress(value=0.0, description=&#39;Downloading&#39;, max=352833716.0, style=ProgressStyle(descri…
 </code></pre>
+<p>​<br>​    </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">generator = pipeline(task=<span class="string">&quot;text-generation&quot;</span>, model=model, tokenizer=tokenizer)</span><br></pre></td></tr></table></figure>
 
 
